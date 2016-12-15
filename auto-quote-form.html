@@ -1,0 +1,50 @@
+<div class="auto-quote-form__wrap">
+    <form name="autoQuoteForm" id="autoQuoteForm" data-ng-submit="autoQuote.submitForm()"  novalidate>
+        <div class="auto-quote-form__group">
+            <label class="auto-quote-form__label" for="carYear">Car Year:</label>
+            <select class="auto-quote-form__select" name="carYear" id="carYear" data-ng-change="autoQuote.getCarMake()" data-ng-options="item as item.Value for item in autoQuote.car.year track by item.Key"
+                    data-ng-model="autoQuote.user.car_year" required>
+                <option value="">- select year -</option>
+            </select>
+        </div>
+        <div class="auto-quote-form__group">
+
+            <label class="auto-quote-form__label" for="carMake">Car Make:</label>
+            <select class="auto-quote-form__select" data-ng-disabled="!autoQuote.car.make" data-ng-change="autoQuote.getCarModel()" name="carMake" id="carMake" data-ng-options="item as item.Value for item in autoQuote.car.make track by item.Key"
+                    data-ng-model="autoQuote.user.car_make" required>
+                <option value="">- select make -</option>
+            </select>
+        </div>
+        <div class="auto-quote-form__group">
+            <label class="auto-quote-form__label" for="carModel">Car Model:</label>
+            <select class="auto-quote-form__select" data-ng-disabled="!autoQuote.car.model"  name="carModel" id="carModel" data-ng-options="item as item.Value for item in autoQuote.car.model track by item.Key"
+                    data-ng-model="autoQuote.user.car_model" required>
+                <option value="">- select model -</option>
+            </select>
+        </div>
+        <div ng-if="view == 'zipCode'" class="auto-quote-form__group">
+            <label class="auto-quote-form__label" for="zip">Zip Code:</label>
+            <input class="auto-quote-form__input" name="zip" id="zip" type="tel"
+                   data-ng-model="autoQuote.user.zip"
+                   data-ng-disabled="autoQuote.msgState == 'sent'"
+                   data-ng-minlength="3"
+                   data-ng-class="{ 'has-error' : contact.contactForm.zip.$invalid && !contact.contactForm.zip.$pristine }"
+                   required
+            >
+        </div>
+        <div class="auto-quote-form__group">
+            <label class="auto-quote-form__label" for="email">E-mail:</label>
+            <input class="auto-quote-form__input" name="email" id="email" type="email"
+                   data-ng-model="autoQuote.user.email"
+                   data-ng-disabled="autoQuote.msgState == 'sent'"
+                   data-ng-minlength="5"
+                   data-ng-class="{ 'has-error' : contact.contactForm.email.$invalid && !contact.contactForm.email.$pristine }"
+                   required
+                   >
+        </div>
+
+        <div class="auto-quote-form__group">
+            <button type="submit" id="quote-submit" form="autoQuoteForm" data-ng-disabled="autoQuoteForm.$invalid" data-ng-click="autoQuote.google_analytics()" class="cta-button cta-button--no-shadow cta-button__custom-icon yellow auto-quote-form__button yellow-bus">{{autoQuote.button_name}}</button>
+        </div>
+    </form>
+</div>
